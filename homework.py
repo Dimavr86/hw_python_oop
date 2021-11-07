@@ -8,10 +8,10 @@ class InfoMessage:
         self.calories = calories
     def get_message(self) -> str:
         return (f'Тип тренировки: {self.training_type}; '
-                f'Длительность: {self.duration: .3f} ч.; ' 
-                f'Дистанция: {self.distance: .3f} км; '
-                f'Ср. скорость: {self.speed: .3f} км/ч; '
-                f'Потрачено ккал: {self.calories: .3f}.\n')
+        f'Длительность: {self.duration:.3f} ч.; '
+        f'Дистанция: {self.distance:.3f} км; '
+        f'Ср. скорость: {self.speed:.3f} км/ч; '
+        f'Потрачено ккал: {self.calories:.3f}.')
 
 
 class Training:
@@ -45,7 +45,8 @@ class Training:
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
-        message = InfoMessage(self.workout_type, self.duration, self.get_distance(), self.get_mean_speed(), self.get_spent_calories())
+        message = InfoMessage(self.workout_type, self.duration, self.get_distance(), 
+        self.get_mean_speed(), self.get_spent_calories())
         return message
 
 
@@ -58,12 +59,13 @@ class Running(Training):
     def get_spent_calories(self):
         coeff_cal_1 = 18
         coeff_cal_2 = 20
-        calories = ((coeff_cal_1 * self.get_mean_speed() - coeff_cal_2) * self.weight / self.M_IN_KM * self.duration * self.H_IN_M)
+        calories = ((coeff_cal_1 * self.get_mean_speed() - coeff_cal_2) * self.weight / 
+        self.M_IN_KM * self.duration * self.H_IN_M)
         return calories
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    workout_type: str = 'Sportswalking'
+    workout_type: str = 'SportsWalking'
     def __init__(self, action, duration, weight, height):
         super().__init__(action, duration, weight)
         self.height = height
@@ -71,7 +73,8 @@ class SportsWalking(Training):
     def get_spent_calories(self):
         coeff_cal_wlk_1: float = 0.035
         coeff_cal_wlk_2: float = 0.029
-        calories = ((coeff_cal_wlk_1 * self.weight + (self.get_mean_speed() // self.height) * coeff_cal_wlk_2 * self.weight) * self.duration * self.H_IN_M)
+        calories = ((coeff_cal_wlk_1 * self.weight + (self.get_mean_speed() // self.height) *
+        coeff_cal_wlk_2 * self.weight) * self.duration * self.H_IN_M)
         return calories
 
 
@@ -127,4 +130,3 @@ if __name__ == '__main__':
     for workout_type, data in packages:
         training = read_package(workout_type, data)
         main(training)
-
