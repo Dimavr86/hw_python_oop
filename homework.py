@@ -22,6 +22,7 @@ class InfoMessage:
                 f'Потрачено ккал: {self.calories:.3f}.')
 
 
+
 class Training:
     """Базовый класс тренировки."""
     workout_type: str = ''
