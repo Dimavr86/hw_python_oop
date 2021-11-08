@@ -120,7 +120,7 @@ class Swimming(Training):
             * self.count_pool
             / self.M_IN_KM
             / self.duration
-            )
+        )
         return speed
 
     def get_spent_calories(self) -> float:
