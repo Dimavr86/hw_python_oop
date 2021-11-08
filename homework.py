@@ -22,7 +22,6 @@ class InfoMessage:
                 f'Потрачено ккал: {self.calories:.3f}.')
 
 
-
 class Training:
     """Базовый класс тренировки."""
     workout_type: str = ''
@@ -35,9 +34,9 @@ class Training:
             action: int,
             duration: float,
             weight: float,) -> None:
-            self.action = action
-            self.duration = duration
-            self.weight = weight
+        self.action = action
+        self.duration = duration
+        self.weight = weight
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -116,16 +115,17 @@ class Swimming(Training):
         self.count_pool = count_pool
 
     def get_mean_speed(self) -> float:
-        speed = (self.lenght_pool * self.count_pool
-                / self.M_IN_KM / self.duration)
+        speed = (self.lenght_pool
+            * self.count_pool
+            / self.M_IN_KM / self.duration)
         return speed
 
     def get_spent_calories(self) -> float:
         coeff_cal_swm_1: float = 1.1
         coeff_cal_swm_2: float = 2
         calories = (
-                (self.get_mean_speed() + coeff_cal_swm_1)
-                * coeff_cal_swm_2 * self.weight)
+            (self.get_mean_speed() + coeff_cal_swm_1)
+            * coeff_cal_swm_2 * self.weight)
         return calories
 
     def get_distance(self):
