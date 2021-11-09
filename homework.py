@@ -84,13 +84,13 @@ class SportsWalking(Training):
 @dataclass
 class Swimming(Training):
     """Тренировка: плавание."""
-    lenght_pool: float
+    length_pool: float
     count_pool: int
     LEN_STEP: ClassVar[float] = 1.38
 
     def get_mean_speed(self) -> float:
         speed = (
-            self.lenght_pool
+            self.length_pool
             * self.count_pool
             / self.M_IN_KM
             / self.duration
