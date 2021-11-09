@@ -46,7 +46,7 @@ class Training:
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
         message = InfoMessage(
-            self.__class__.__name__,
+            type(self).__name__,
             self.duration,
             self.get_distance(),
             self.get_mean_speed(),
@@ -55,8 +55,8 @@ class Training:
 
 
 class Running(Training):
-    K_CAL_1 = 18
-    K_CAL_2 = 20
+    K_CAL_1: float = 18
+    K_CAL_2: float = 20
 
     def get_spent_calories(self):
         calories = ((self.K_CAL_1
@@ -75,7 +75,7 @@ class SportsWalking(Training):
 
     def get_spent_calories(self):
         calories = ((self.K_CAL_WLK_1 * self.weight
-                    + (self.get_mean_speed() // self.height)
+                    + (self.get_mean_speed() ** 2 // self.height)
                     * self.K_CAL_WLK_2 * self.weight)
                     * self.duration * self.M_IN_H)
         return calories
@@ -87,6 +87,8 @@ class Swimming(Training):
     length_pool: float
     count_pool: int
     LEN_STEP: ClassVar[float] = 1.38
+    K_CAL_SWM_1: ClassVar[float] = 1.1
+    K_CAL_SWM_2: ClassVar[float] = 2
 
     def get_mean_speed(self) -> float:
         speed = (
@@ -98,11 +100,9 @@ class Swimming(Training):
         return speed
 
     def get_spent_calories(self) -> float:
-        K_CAL_SWM_1: float = 1.1
-        K_CAL_SWM_2: float = 2
         calories = (
-            (self.get_mean_speed() + K_CAL_SWM_1)
-            * K_CAL_SWM_2 * self.weight)
+            (self.get_mean_speed() + self.K_CAL_SWM_1)
+            * self.K_CAL_SWM_2 * self.weight)
         return calories
 
 
